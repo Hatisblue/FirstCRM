@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+  body {
+    font-family: Calibri, sans-serif;
+  }
+  .btn {
+    display: inline-block; /* Строчно-блочный элемент */
+    background: #008CBA; /* Blue цвет фона */
+    color: #fff; /* Белый цвет текста */
+    padding: 0.5rem 1rem; /* Поля вокруг текста */
+    text-decoration: none; /* Убираем подчёркивание */
+    border-radius: 6px; /* Скругляем уголки */
+  }
+  .btn:hover {background-color: #3e8e41}
+  .btn:active {
+    background-color: #3e8e41;
+    box-shadow: 0 3px #666;
+    transform: translateY(4px);
+  }
+  table {
+    width: 50%;
+    border-collapse: collapse;
+  }
+  table, th, td {
+    border: 1px solid black;
+  }
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+  th {
+    background-color: #008CBA;
+    color: white;
+  }
+  tr:hover {background-color: #f5f5f5;}
+
+
+</style>
+
+<body>
+<table>
+  <thead>
+  <tr>
+    <th>Person</th>
+    <th>Average time completed in hours</th>
+    <th>Count issues</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="person : ${avgForPeople}">
+    <td th:text="${person['name']}"></td>
+    <td th:text="${person['averageissueduration']}"></td>
+    <td th:text="${person['count']}"></td>
+  </tr>
+  </tbody>
+<br/>
+  <a href="/people/withIndex" class ="btn">Return to list Issues</a>
+
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update issue</title>
+</head>
+<style>
+    body {
+        font-family: Montserrat, sans-serif;
+    }
+    h1 {
+        background-color: #008CBA;
+        color: white;
+    }
+    form {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+
+    }
+    div {
+        margin-bottom: 15px;
+    }
+    label {
+        font-weight: 500;
+        display: block;
+        margin-bottom: 8px;
+    }
+    input[type="text"], textarea, select, input[type="datetime-local"] {
+        font-family: Montserrat, sans-serif;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    table, th, td {
+
+        border: 1px solid black;
+    }
+    th, td {
+
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #008CBA;
+        color: white;
+    }
+    tr:hover {background-color: #f5f5f5;}
+    .btn {
+        display: inline-block; /* Строчно-блочный элемент */
+        background: #008CBA; /* Blue цвет фона */
+        color: #fff; /* Белый цвет текста */
+        padding: 0.5rem 1rem; /* Поля вокруг текста */
+        text-decoration: none; /* Убираем подчёркивание */
+        border-radius: 6px; /* Скругляем уголки */
+    }
+    .btn:hover {background-color: #3e8e41}
+    .btn:active {
+        background-color: #3e8e41;
+        box-shadow: 0 3px #666;
+        transform: translateY(4px);
+    }
+    .text-center {
+        text-align: center;
+    }
+</style>
+<body>
+<h1 class="text-center">Edit Issue</h1>
+
+<form th:method="patch" th:action="@{/issue/{issue_id}(issue_id=${issue.getIssue_id()})}"  th:object="${issue}">
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" th:field="*{title}">
+    </div>
+    <div>
+        <label for="description">Description:</label>
+        <textarea id="description" th:field="*{description}"></textarea>
+    </div>
+    <div>
+        <label for="person_id">Assigned to:</label>
+        <select id="person_id" th:field="*{person_id}">
+            <option th:each="person : ${people}" th:value="${person.person_id}" th:text="${person.name}"></option>
+        </select>
+    </div>
+
+    <input type="submit" value="Update!" class="btn"/>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>New Issue</title>
+  <style>
+    body {
+      font-family: Calibri, sans-serif;
+    }
+    h1 {
+      background-color: #008CBA;
+      color: white;
+    }
+    form {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    div {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="text"], textarea, select, input[type="datetime-local"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    body {
+      font-family: Calibri, sans-serif;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #008CBA;
+      color: white;
+    }
+    tr:hover {background-color: #f5f5f5;}
+    button {
+      display: inline-block; /* Строчно-блочный элемент */
+      background: #008CBA; /* Blue цвет фона */
+      color: #fff; /* Белый цвет текста */
+      padding: 0.5rem 1rem; /* Поля вокруг текста */
+      text-decoration: none; /* Убираем подчёркивание */
+      border-radius: 6px; /* Скругляем уголки */
+    }
+    button:hover {background-color: #3e8e41}
+    button:active {
+      background-color: #3e8e41;
+      box-shadow: 0 3px #666;
+      transform: translateY(4px);
+    }
+    .text-center {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<h1 class="text-center">Create New Issue</h1>
+<form th:object="${issue}" th:action="@{/issue}" method="post">
+  <div>
+    <label for="title">Title:</label>
+    <input type="text" id="title" th:field="*{title}">
+    <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</div>
+  </div>
+  <div>
+    <label for="description">Description:</label>
+    <textarea id="description" th:field="*{description}"></textarea>
+    <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</div>
+  </div>
+  <div>
+    <label for="starttime">Start Time:</label>
+    <input type="datetime-local" id="starttime" th:field="*{starttime}">
+    <div style="color:red" th:if="${#fields.hasErrors('starttime')}" th:errors="*{starttime}">Time Error</div>
+  </div>
+  <div>
+    <label for="person_id">Assigned to:</label>
+    <select id="person_id" th:field="*{person_id}">
+      <option th:each="person : ${people}" th:value="${person.person_id}" th:text="${person.name}"></option>
+    </select>
+  </div>
+  <button type="submit">Create Issue</button>
+</form>
+</body>
+</html>
